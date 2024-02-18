@@ -1,44 +1,21 @@
 #!/bin/bash
 
-# ESTAVA EDITANDO O MTPROTO - REALIZANDO A CONFIGURAÇÃO
-
 ###### COPYRIGHT RDY SOFTWARE 2024
 # 13/02/2024
 # Definindo o PATH
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
+# Verifique o diretório do script
+script_dir="/usr/local/bin"
 
-# Function to download files from GitHub
-download_from_github() {
-    file="$1"
-    url="https://raw.githubusercontent.com/RDY8799/VPS-tools/main/$file"
-    destination="/usr/local/bin/$file"
-    echo "Downloading $file..."
-    if [ -e "$destination" ]; then
-        read -p "File $file already exists. Do you want to overwrite it? (y/n): " choice
-        if [ "$choice" = "y" ]; then
-            rm -f "$destination"
-        else
-            echo "Skipping $file"
-            return
-        fi
-    fi
-    curl -sL "$url" -o "$destination"
-    chmod +x "$destination"
-    echo "$file downloaded and saved to $destination"
-}
-
-# Check if command is 'menu update' and execute download function
-if [ "$1" = "menu" ] && [ "$2" = "update" ]; then
-    # Download other files from GitHub and save them in /usr/local/bin
-    download_from_github "RDYDROPBEAR"
-    download_from_github "RDYSQUIDPROXY"
-    download_from_github "RDYSSLH"
-    download_from_github "RDYSTUNNEL"
-    download_from_github "STRINGS"
+# Carregando as strings
+if [ -f "$script_dir/STRINGS" ]; then
+    source "$script_dir/STRINGS"
+else
+    echo "Erro: Arquivo de strings não encontrado em $script_dir/STRINGS"
+    exit 1
 fi
-
 
 # Verificando permissões de root
 if [ "$(id -u)" -eq 0 ]; then
@@ -75,7 +52,7 @@ usedram=$(free | grep Mem | awk '{print $3}')
 freeram=$(free | grep Mem | awk '{print $4}')
 swapram=$( cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
 
-RDY_HEADER="$yellow CPU USADA:$cyano$CPU ${blue}|$f$yellow RAM USADA: $cyano$(($usedram / 1024))MB$yellow LIVRE: $cyano$(($freeram / 1024))MB ${blue}|$f$yellow SWAP: $cyano$(($swapram / 1024))MB $f\n$green ##### $white IP:$cyano  $ip $f\n$green ##### $white $SYSTEM:$cyano  $(cat /etc/so) $f\n$green ##### $white $USER:$cyano  $USERPROFILENAME $f\n$DIVIS\n$green $yellow [${blue}i$yellow] $yellow=$f$white $NOTIFICATION $yellow 5         ${blue}/${red}/${green}/ $cyano$about$f\n$DIVIS";
+RDY_HEADER="$yellow CPU USADA:$cyano$CPU ${blue}|$f$yellow RAM USADA: $cyano$(($usedram / 1024))MB$yellow LIVRE: $cyano$(($freeram / 1024))MB ${blue}|$f$yellow SWAP: $cyano$(($swapram / 1024))MB $f\n$green ##### $white IP:$cyano  $ip $f\n$green ##### $white $SYSTEM:$cyano  $system_info $f\n$green ##### $white $USER:$cyano  $USERPROFILENAME $f\n$DIVIS\n$green $yellow [${blue}i$yellow] $yellow=$f$white $NOTIFICATION $yellow 5         ${blue}/${red}/${green}/ $cyano$about$f\n$DIVIS";
 
 # Função para exibir uma animação de spinner
 RDYSPINNER()
@@ -181,7 +158,7 @@ RDYBADVPN(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}MENU DE INSTALAÇÃO${blue}/${mag}BADVPN$f                    $yellow [${blue}v$yellow] $yellow=$f$white Voltar$f";
     echo -e $DIVIS
     echo -e "$green ##### $white IP:$cyano  $ip $f";
-    echo -e "$green ##### $white $SYSTEM:$cyano  $(cat /etc/so) $f";
+    echo -e "$green ##### $white $SYSTEM:$cyano  $system_info $f";
     echo -e "$green ##### $white $USER:$cyano  $USERPROFILENAME $f";
     echo -e $DIVIS
     
@@ -335,7 +312,7 @@ RDYINSTALL() {
     clear
     echo -e $DIVIS
     echo -e "$green ##### $white IP:$cyano  $ip $f";
-    echo -e "$green ##### $white Sistema:$cyano  $(cat /etc/so) $f";
+    echo -e "$green ##### $white Sistema:$cyano  $system_info $f";
     echo -e "$green ##### $white USUÁRIO:$cyano  $USERPROFILENAME $f";
     echo -e $DIVIS
     
@@ -1036,7 +1013,7 @@ RDYUSERMANAGER(){
     echo -e $DIVIS
     echo -e "$yellow CPU USADA:$cyano$CPU ${blue}|$f$yellow RAM USADA: $cyano$(($usedram / 1024))MB$yellow LIVRE: $cyano$(($freeram / 1024))MB ${blue}|$f$yellow SWAP: $cyano$(($swapram / 1024))MB  $f"
     echo -e "$green ##### $white IP:$cyano  $ip $f";
-    echo -e "$green ##### $white Sistema:$cyano  $(cat /etc/so) $f";
+    echo -e "$green ##### $white Sistema:$cyano  $system_info $f";
     echo -e "$green ##### $white USUÁRIO:$cyano  $USERPROFILENAME $f";
     echo -e $DIVIS
     echo -e "$green $yellow [${blue}i$yellow] $yellow=$f$white Notificações $yellow 5         ${blue}/${red}/${green}/ $cyano$about$f";
@@ -1442,7 +1419,7 @@ RDYTOOLS(){
     
     echo -e "$yellow CPU USADA:$cyano$CPU ${blue}|$f$yellow RAM USADA: $cyano$(($usedram / 1024))MB$yellow LIVRE: $cyano$(($freeram / 1024))MB ${blue}|$f$yellow SWAP: $cyano$(($swapram / 1024))MB  $f"
     echo -e "$green ##### $white IP:$cyano  $ip $f";
-    echo -e "$green ##### $white $SYSTEM:$cyano  $(cat /etc/so) $f";
+    echo -e "$green ##### $white $SYSTEM:$cyano  $system_info $f";
     echo -e "$green ##### $white $USER:$cyano  $USERPROFILENAME $f";
     echo -e $DIVIS
     echo -e "$green $yellow [${blue}i$yellow] $yellow=$f$white $NOTIFICATION $yellow 5         ${blue}/${red}/${green}/ $cyano$about$f";
@@ -1501,7 +1478,7 @@ RDYMENU(){
     
     echo -e "$yellow CPU USADA:$cyano$CPU ${blue}|$f$yellow RAM USADA: $cyano$(($usedram / 1024))MB$yellow LIVRE: $cyano$(($freeram / 1024))MB ${blue}|$f$yellow SWAP: $cyano$(($swapram / 1024))MB  $f"
     echo -e "$green ##### $white IP:$cyano  $ip ${blue}| $ippublic $f";
-    echo -e "$green ##### $white $SYSTEM:$cyano  $(cat /etc/so) $f";
+    echo -e "$green ##### $white $SYSTEM:$cyano  $system_info $f";
     echo -e "$green ##### $white $USER:$cyano  $USERPROFILENAME $f";
     echo -e $DIVIS
     echo -e "$green $yellow [${blue}i$yellow] $yellow=$f$white $NOTIFICATION $yellow 5         ${blue}/${red}/${green}/ $cyano$about$f";

@@ -1,18 +1,40 @@
 #!/bin/bash
 
-# Caminho do arquivo de configuração do SSLH
-SSLH_CONFIG_FILE="/etc/default/sslh"
 
-# Função para alterar as portas no arquivo de configuração
-change_ports() {
-    local port_to_change=$1
-    local new_port=$2
-    
-    sed -i "s/\b$port_to_change\b/$new_port/g" $SSLH_CONFIG_FILE
-    service sslh restart
+
+# Função para alterar a porta SSH
+change_ssh_port() {
+    read -p "Digite a nova porta SSH: " new_port
+    sed -i "s/--ssh [0-9]\+:/--ssh $new_port:/" /etc/default/sslh
+    echo "Porta SSH alterada para $new_port."
+    read -p "Pressione Enter para voltar ao menu principal..."
 }
 
-# Função para exibir o menu de opções
+# Função para alterar a porta HTTP
+change_http_port() {
+    read -p "Digite a nova porta HTTP: " new_port
+    sed -i "s/--http [0-9]\+:/--http $new_port:/" /etc/default/sslh
+    echo "Porta HTTP alterada para $new_port."
+    read -p "Pressione Enter para voltar ao menu principal..."
+}
+
+# Função para alterar a porta SSL
+change_ssl_port() {
+    read -p "Digite a nova porta SSL: " new_port
+    sed -i "s/--ssl [0-9]\+:/--ssl $new_port:/" /etc/default/sslh
+    echo "Porta SSL alterada para $new_port."
+    read -p "Pressione Enter para voltar ao menu principal..."
+}
+
+# Função para alterar a porta OpenVPN
+change_openvpn_port() {
+    read -p "Digite a nova porta OpenVPN: " new_port
+    sed -i "s/--openvpn [0-9]\+:/--openvpn $new_port:/" /etc/default/sslh
+    echo "Porta OpenVPN alterada para $new_port."
+    read -p "Pressione Enter para voltar ao menu principal..."
+}
+
+# Função para exibir o menu
 show_menu() {
     clear
     echo "Menu de alteração de portas do SSLH"
@@ -24,50 +46,17 @@ show_menu() {
     echo "5. Sair"
     echo "-----------------------------------"
     echo -n "Escolha uma opção: "
-    
-    
-    # Loop principal do programa
-    while true; do
-        read choice
-        case $choice in
-            1)
-                echo -n "Digite a nova porta SSH: "
-                read new_ssh_port
-                change_ports "ssh" "ssh 127.0.0.1:$new_ssh_port"
-                echo "Porta SSH alterada para $new_ssh_port"
-            ;;
-            2)
-                echo -n "Digite a nova porta HTTP: "
-                read new_http_port
-                change_ports "http" "http 127.0.0.1:$new_http_port"
-                echo "Porta HTTP alterada para $new_http_port"
-            ;;
-            3)
-                echo -n "Digite a nova porta SSL: "
-                read new_ssl_port
-                change_ports "ssl" "ssl 127.0.0.1:$new_ssl_port"
-                echo "Porta SSL alterada para $new_ssl_port"
-            ;;
-            4)
-                echo -n "Digite a nova porta OpenVPN: "
-                read new_openvpn_port
-                change_ports "openvpn" "openvpn 127.0.0.1:$new_openvpn_port"
-                echo "Porta OpenVPN alterada para $new_openvpn_port"
-            ;;
-            5)
-                echo "Saindo..."
-                exit 0
-            ;;
-            *)
-                echo "Opção inválida. Tente novamente."
-                sleep 3
-                show_menu
-            ;;
-        esac
-        echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...${f}"; read -n1 -r -p ""
-        $mainmenu
-    done
+    read choice
+    case $choice in
+        1) change_ssh_port ;;
+        2) change_http_port ;;
+        3) change_ssl_port ;;
+        4) change_openvpn_port ;;
+        5) exit ;;
+        *) echo "Opção inválida!";;
+    esac
 }
+
 
 
 
