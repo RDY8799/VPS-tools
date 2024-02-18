@@ -893,7 +893,7 @@ RDYUSERMONITOR(){
     clear
     while true; do
         echo ""
-        echo -e "${mag}                Para $EXIT, tecle Ctrl + c                    $f";
+        echo -e "${mag}                Para voltar ao menu, pressione a tecla 'Q'                    $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
         echo -e "\033[45;1;37m   Usuário                :               Conexão/Limite   $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
@@ -908,10 +908,18 @@ RDYUSERMONITOR(){
             echo -e "${yellow}     $(printf '%-42s%s' $usur $usurnum/$rdy) $f";
             echo -e "${mag}|---------------------------------------------------------|$f";
         done
-        sleep 5s
+
+        # Captura da entrada do teclado
+        read -rsn1 input
+        if [[ $input = "q" || $input = "Q" ]]; then
+            clear
+            return  # Retorna ao menu
+        fi
+        
         clear
     done
 }
+
 
 RDYBACKUPUSERS(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}GERENCIAMENTO DE USUÁRIOS${blue}/${mag}$BACKUPUSERS$f";
