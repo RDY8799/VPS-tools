@@ -339,13 +339,13 @@ RDYINSTALL() {
             echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
         $mainmenu ;;
         1 | 01) source RDYSSLH ;;
-        2 | 02) RDYBADVPN ;;
+        2 | 02) source RDYBADVPN ;;
         3 | 03) source RDYSQUIDPROXY ;;
         4 | 04) source RDYDROPBEAR ;;
         5 | 05) source RDYSTUNNEL ;;
-        6 | 06) RDYSOCKS ;;
+        6 | 06) source RDYSOCKS ;;
         7 | 07) source RDYSTUNNEL ;;
-        8 | 08) RDYMTPROTO ;;
+        8 | 08) source RDYMTPROTO ;;
         00) exit ;;
         * ) echo -e "$red Opção inválida!$f" ; echo "" ; sleep 2 ; $mainmenu ;;
     esac
@@ -891,26 +891,27 @@ RDYDISCONNECTUSER(){
 
 RDYUSERMONITOR(){
     clear
-    mag="\033[35m"
-    yellow="\033[33m"
-    f="\033[0m"
     while true; do
         echo ""
-        echo -e "${mag}        Para voltar ao menu, pressione a tecla 'Q'                    $f";
+        echo -e "${mag}                Para $EXIT, tecle Ctrl + c                    $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
         echo -e "\033[45;1;37m   Usuário                :               Conexão/Limite   $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
-        awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9] | \
-        xargs -I {} sh -c 'usurnum=$(ps -u {} |grep sshd |wc -l); if cat /etc/rdy/limit/{} > /dev/null 2> /dev/null; then rdy=$(cat /etc/rdy/limit/{}); else rdy="?"; fi; echo -e "${yellow}     $(printf "%-42s%s" {} $usurnum/$rdy) $f"; echo -e "${mag}|---------------------------------------------------------|$f"'
-        # Captura da entrada do teclado
-        read -rsn1 input
-        if [[ $input = "q" || $input = "Q" ]]; then
-           $mainmenu;
-        fi
+        for usur in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9]`; do
+            usurnum=$(ps -u $usur |grep sshd |wc -l)
+            if cat /etc/rdy/limit/$usur > /dev/null 2> /dev/null
+            then
+                rdy=$(cat /etc/rdy/limit/$usur)
+            else
+                rdy="?"
+            fi
+            echo -e "${yellow}     $(printf '%-42s%s' $usur $usurnum/$rdy) $f";
+            echo -e "${mag}|---------------------------------------------------------|$f";
+        done
+        sleep 5s
         clear
     done
 }
-
 
 RDYBACKUPUSERS(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}GERENCIAMENTO DE USUÁRIOS${blue}/${mag}$BACKUPUSERS$f";
