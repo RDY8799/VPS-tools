@@ -897,25 +897,14 @@ RDYUSERMONITOR(){
         echo -e "${mag}|---------------------------------------------------------|$f";
         echo -e "\033[45;1;37m   Usuário                :               Conexão/Limite   $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
-        for usur in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9]`; do
-            usurnum=$(ps -u $usur |grep sshd |wc -l)
-            if cat /etc/rdy/limit/$usur > /dev/null 2> /dev/null
-            then
-                rdy=$(cat /etc/rdy/limit/$usur)
-            else
-                rdy="?"
-            fi
-            echo -e "${yellow}     $(printf '%-42s%s' $usur $usurnum/$rdy) $f";
-            echo -e "${mag}|---------------------------------------------------------|$f";
-        done
-
+        awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9] | \
+        xargs -I {} sh -c 'usurnum=$(ps -u {} |grep sshd |wc -l); if cat /etc/rdy/limit/{} > /dev/null 2> /dev/null; then rdy=$(cat /etc/rdy/limit/{}); else rdy="?"; fi; echo -e "${yellow}     $(printf "%-42s%s" {} $usurnum/$rdy) $f"; echo -e "${mag}|---------------------------------------------------------|$f"'
         # Captura da entrada do teclado
         read -rsn1 input
         if [[ $input = "q" || $input = "Q" ]]; then
             clear
-            return  # Retorna ao menu
+           $mainmenu
         fi
-        
         clear
     done
 }
