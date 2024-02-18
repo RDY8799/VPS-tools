@@ -70,11 +70,11 @@ show_menu() {
         systemctl restart sslh >> /dev/null 2>&1
         echo -e "${green}A porta para SSLH foi atualizada com sucesso!${f}"
         echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
-        menu
+        RDYSSLH
     else
         echo -e "${green}A porta para o protocolo $protocol foi atualizada com sucesso!${f}"
         echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
-        menu
+        RDYSSLH
     fi
     
 }
