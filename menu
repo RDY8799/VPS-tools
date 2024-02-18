@@ -902,7 +902,7 @@ RDYUSERMONITOR(){
         # Captura da entrada do teclado
         read -rsn1 input
         if [[ $input = "q" || $input = "Q" ]]; then
-            clear
+          #  clear
            $mainmenu
         fi
         clear
