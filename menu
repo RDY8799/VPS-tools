@@ -891,6 +891,9 @@ RDYDISCONNECTUSER(){
 
 RDYUSERMONITOR(){
     clear
+    mag="\033[35m"
+    yellow="\033[33m"
+    f="\033[0m"
     while true; do
         echo ""
         echo -e "${mag}        Para voltar ao menu, pressione a tecla 'Q'                    $f";
@@ -902,7 +905,6 @@ RDYUSERMONITOR(){
         # Captura da entrada do teclado
         read -rsn1 input
         if [[ $input = "q" || $input = "Q" ]]; then
-          #  clear
            $mainmenu;
         fi
         clear
