@@ -339,13 +339,13 @@ RDYINSTALL() {
             echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
         $mainmenu ;;
         1 | 01) source RDYSSLH ;;
-        2 | 02) source RDYBADVPN ;;
+        2 | 02) RDYBADVPN ;;
         3 | 03) source RDYSQUIDPROXY ;;
         4 | 04) source RDYDROPBEAR ;;
         5 | 05) source RDYSTUNNEL ;;
-        6 | 06) source RDYSOCKS ;;
+        6 | 06) RDYSOCKS ;;
         7 | 07) source RDYSTUNNEL ;;
-        8 | 08) source RDYMTPROTO ;;
+        8 | 08) RDYMTPROTO ;;
         00) exit ;;
         * ) echo -e "$red Opção inválida!$f" ; echo "" ; sleep 2 ; $mainmenu ;;
     esac
