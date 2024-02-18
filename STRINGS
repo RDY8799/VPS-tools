@@ -61,7 +61,7 @@ MANAGE_USERS="GERENCIAMENTO DE USUÁRIOS";
 TOOLS="FERRAMENTAS";
 ABOUT="SOBRE";
 
-about="© ${blue}Copyright ${yellow}RDY ${red}SOFTWARE ${yellow}{${red}}$f ${blue}2019$f"
+about="© ${blue}Copyright ${yellow}RDY ${red}SOFTWARE ${yellow}{${red}}$f ${blue}2024$f"
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so
 # VERIFICAR O IP DO SERVIDOR
 ip=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
