@@ -893,7 +893,7 @@ RDYUSERMONITOR(){
     clear
     while true; do
         echo ""
-        echo -e "${mag}                Para voltar ao menu, pressione a tecla 'Q'                    $f";
+        echo -e "${mag}        Para voltar ao menu, pressione a tecla 'Q'                    $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
         echo -e "\033[45;1;37m   Usuário                :               Conexão/Limite   $f";
         echo -e "${mag}|---------------------------------------------------------|$f";
@@ -903,7 +903,7 @@ RDYUSERMONITOR(){
         read -rsn1 input
         if [[ $input = "q" || $input = "Q" ]]; then
           #  clear
-           $mainmenu
+           $mainmenu;
         fi
         clear
     done
