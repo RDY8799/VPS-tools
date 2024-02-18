@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# curl -o /bin/menu -H "Cache-Control: no-cache" -L "https://raw.githubusercontent.com/RDY8799/VPS-tools/main/git_menu" && chmod +x /bin/git_menu && git_menu
 
 # Função para alterar a porta SSH
 change_ssh_port() {
@@ -8,6 +8,7 @@ change_ssh_port() {
     sed -i "s/--ssh [0-9]\+:/--ssh $new_port:/" /etc/default/sslh
     echo "Porta SSH alterada para $new_port."
     read -p "Pressione Enter para voltar ao menu principal..."
+    show_menu
 }
 
 # Função para alterar a porta HTTP
@@ -16,6 +17,7 @@ change_http_port() {
     sed -i "s/--http [0-9]\+:/--http $new_port:/" /etc/default/sslh
     echo "Porta HTTP alterada para $new_port."
     read -p "Pressione Enter para voltar ao menu principal..."
+    show_menu
 }
 
 # Função para alterar a porta SSL
@@ -24,6 +26,7 @@ change_ssl_port() {
     sed -i "s/--ssl [0-9]\+:/--ssl $new_port:/" /etc/default/sslh
     echo "Porta SSL alterada para $new_port."
     read -p "Pressione Enter para voltar ao menu principal..."
+    show_menu
 }
 
 # Função para alterar a porta OpenVPN
@@ -32,6 +35,7 @@ change_openvpn_port() {
     sed -i "s/--openvpn [0-9]\+:/--openvpn $new_port:/" /etc/default/sslh
     echo "Porta OpenVPN alterada para $new_port."
     read -p "Pressione Enter para voltar ao menu principal..."
+    show_menu
 }
 
 # Função para exibir o menu
@@ -56,9 +60,6 @@ show_menu() {
         *) echo "Opção inválida!";;
     esac
 }
-
-
-
 
 # Função para verificar se a porta está disponível
 check_port() {
