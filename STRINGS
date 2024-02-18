@@ -19,7 +19,7 @@ USERNAME="USUÁRIO";
 SYSTEM="SISTEMA";
 USERPROFILENAME=$USER;
 
-DIVIS="${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f";
+DIVIS="\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m";
 
 
 NEWUSER="NOVO USUÁRIO";
