@@ -118,8 +118,11 @@ install_trojan() {
     sed -i "s/server_name _;/server_name $domain;/g" /etc/nginx/sites-available/default
 
     # Atualiza as portas do NGINX para HTTP e HTTPS
-    sed -i "s/listen 80;/listen $nginx_http_port;/g" /etc/nginx/sites-available/default
-    sed -i "s/listen 443 ssl;/listen $nginx_https_port ssl;/g" /etc/nginx/sites-available/default
+    sed -i "s/listen 80 default_server;/listen $nginx_http_port default_server;/g" /etc/nginx/sites-available/default
+    sed -i "s/listen \[::\]:80 default_server;/listen \[::\]:$nginx_http_port default_server;/g" /etc/nginx/sites-available/default
+
+    sed -i "s/# listen 443 ssl default_server;/listen $nginx_https_port ssl default_server;/g" /etc/nginx/sites-available/default
+    sed -i "s/# listen \[::\]:443 ssl default_server;/listen \[::\]:$nginx_https_port ssl default_server;/g" /etc/nginx/sites-available/default
 
     cp /var/www/html/index.nginx-debian.html /var/www/html/index.html
     systemctl restart nginx

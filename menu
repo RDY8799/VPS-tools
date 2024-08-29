@@ -348,7 +348,7 @@ RDYINSTALL() {
     echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white MTPROTO $MTPROXYSTATUSS $f";
 <<<<<<< HEAD
 =======
-    echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white TROJAN $TROJANSTATUSS $f";
+    echo -e "$green $yellow [${blue}09$yellow] $yellow=$f$white TROJAN $TROJANSTATUSS $f";
 >>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
     echo -e "$green $yellow [${blue}00$yellow] $yellow=$f$white $EXIT $f";
     echo -e $DIVIS
