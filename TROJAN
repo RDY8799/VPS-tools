@@ -40,8 +40,8 @@ if [[ -z "$ip" ]]; then
 fi
 
 # Dados da RDY Software
-about="© RDY SOFTWARE | 2016 - 2022 All rights reserved"
-email="rdysoftware@gmail.com"
+about="© RDY SOFTWARE | 2016 - 2024 All rights reserved"
+email="tomadassh@gmail.com"
 
 install_trojan() {
     # Loop para obter um domínio válido
@@ -56,9 +56,9 @@ install_trojan() {
         fi
     done
 
-    # Loop para obter uma porta válida
+    # Loop para obter uma porta válida para o Trojan
     while true; do
-        read -p "Digite a porta que deseja verificar (Ex: 443): " port
+        read -p "Digite a porta que deseja usar para o Trojan (Ex: 443): " port
         if [[ $port =~ ^[0-9]+$ ]]; then
             check_port $port
             if [ "$available" = true ]; then
@@ -69,6 +69,31 @@ install_trojan() {
         fi
     done
     porttrojan=$port
+
+    # Loop para obter uma porta válida para o NGINX
+    while true; do
+        read -p "Digite a porta que deseja configurar para o NGINX HTTP (Ex: 8080): " nginx_http_port
+        if [[ $nginx_http_port =~ ^[0-9]+$ ]]; then
+            check_port $nginx_http_port
+            if [ "$available" = true ]; then
+                break
+            fi
+        else
+            echo "Por favor, digite um número de porta válida."
+        fi
+    done
+
+    while true; do
+        read -p "Digite a porta que deseja configurar para o NGINX HTTPS (Ex: 8443): " nginx_https_port
+        if [[ $nginx_https_port =~ ^[0-9]+$ ]]; then
+            check_port $nginx_https_port
+            if [ "$available" = true ]; then
+                break
+            fi
+        else
+            echo "Por favor, digite um número de porta válida."
+        fi
+    done
 
     # Loop para obter uma senha válida
     while true; do
@@ -91,8 +116,13 @@ install_trojan() {
 
     # Substitui o 'server_name' pelo domínio informado
     sed -i "s/server_name _;/server_name $domain;/g" /etc/nginx/sites-available/default
+
+    # Atualiza as portas do NGINX para HTTP e HTTPS
+    sed -i "s/listen 80;/listen $nginx_http_port;/g" /etc/nginx/sites-available/default
+    sed -i "s/listen 443 ssl;/listen $nginx_https_port ssl;/g" /etc/nginx/sites-available/default
+
     cp /var/www/html/index.nginx-debian.html /var/www/html/index.html
-    systemctl start nginx
+    systemctl restart nginx
 
     echo -e "\033[1;36m\033[1;32m✓\033[0m OK\033[0m"
     echo ""
@@ -124,6 +154,12 @@ install_trojan() {
 
     echo -e "\033[1;36m\033[1;32m✓✓✓✓✓✓✓✓✓✓ FINALIZADO! ✓✓✓✓✓✓✓✓✓✓✓\033[0m"
     echo -e "O Trojan foi instalado com sucesso no domínio: $domain na porta: $porttrojan"
+    echo -e "${white}//${yellow}//${green}//${mag}//    ${blue}CONFIGURAÇÃO CONCLUÍDA COM ${green}SUCESSO!$f"
+    echo -e "${white}//${yellow}//${green}//${mag}//    ${green} √ ${white} PORTA Trojan:${red}  $porttrojan $f"
+    echo -e "${white}//${yellow}//${green}//${mag}//    ${green} √ ${white} IP/HOST: ${red}$ip / $domain$f"
+    echo ""
+    echo -e $DIVIS
+    echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p ""
 }
 
 # Menu principal
