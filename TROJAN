@@ -129,7 +129,9 @@ install_trojan() {
 
     echo -e "\033[1;36m\033[1;32m•\033[0m Instalando e configurando certificado...\033[0m"
     apt install certbot python3-certbot-nginx -y >/dev/null 2>/dev/null
-    certbot --nginx -d "$domain" --non-interactive --agree-tos -m "$email"
+    sudo systemctl stop nginx
+    sudo certbot certonly --standalone -d "$domain" --non-interactive --agree-tos -m "$email"
+    sudo systemctl start nginx
 
     # Configura permissões corretas
     chmod +rx /etc/letsencrypt/live
@@ -153,13 +155,13 @@ install_trojan() {
     systemctl start trojan
 
     echo -e "\033[1;36m\033[1;32m✓✓✓✓✓✓✓✓✓✓ FINALIZADO! ✓✓✓✓✓✓✓✓✓✓✓\033[0m"
-    echo -e "O Trojan foi instalado com sucesso no domínio: $domain na porta: $porttrojan"
     echo -e "${white}//${yellow}//${green}//${mag}//    ${blue}CONFIGURAÇÃO CONCLUÍDA COM ${green}SUCESSO!$f"
     echo -e "${white}//${yellow}//${green}//${mag}//    ${green} √ ${white} PORTA Trojan:${red}  $porttrojan $f"
     echo -e "${white}//${yellow}//${green}//${mag}//    ${green} √ ${white} IP/HOST: ${red}$ip / $domain$f"
     echo ""
     echo -e $DIVIS
     echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p ""
+    $mainmenu
 }
 
 # Menu principal
