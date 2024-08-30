@@ -73,7 +73,7 @@ RDYSTUNNEL() {
                 echo -e "${white}//${yellow}//${green}//${mag}//    ${red}(START) ${blue}OPERAÇÃO ${green}CONCLUÍDA!$f";
                 echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar...$f"; read -n1 -r -p "";
             RDYSTUNNEL ;;
-            1 | 01) RDYMANAGEPORT ;;
+            1 | 01) source PORTCHANGER ;;
             2 | 02)
                 echo -e "${white}//${yellow}//${green}//${mag}//    ${green} DESINSTALAR SSL/TLS Stunnel4?$f";
                 read -p "[s/n]: " -e -i n REMOVE

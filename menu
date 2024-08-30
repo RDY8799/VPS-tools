@@ -118,8 +118,7 @@ else
     SSLHSTATUSS="${green}°$f"
 fi
 
-<<<<<<< HEAD
-=======
+
 if ! dpkg -s trojan &>/dev/null; then
     TROJANINFO="${white}TROJAN ${red}NÃO INSTALADO$f"
     TROJANSTATUS="NO"
@@ -129,7 +128,7 @@ else
     TROJANSTATUSS="${green}°$f"
 fi
 
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
 # Verificar se o Stunnel está instalado
 if ! dpkg -s stunnel4 &>/dev/null; then
     STUNNELINFO="${white}SSL/TLS Stunnel4 ${red}NÃO INSTALADO$f"
@@ -161,7 +160,7 @@ else
 fi
 
 
-<<<<<<< HEAD
+
 
 ###################################################################################
 
@@ -311,8 +310,8 @@ RDYBADVPN(){
 ###################################################################################
 
 
-=======
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
+
 #### MTPROTO
 
 
@@ -335,21 +334,20 @@ RDYINSTALL() {
     echo -e $DIVIS
     
     echo -e "$green $yellow [${blue}01$yellow] $yellow=$f$white SSLH $SSLHSTATUSS $f";
-<<<<<<< HEAD
+
     echo -e "$green $yellow [${blue}02$yellow] $yellow=$f$white BADVPN $STUNNELSTATUSS $f";
-=======
+
     echo -e "$green $yellow [${blue}02$yellow] $yellow=$f$white BADVPN $BADVPNSTATUSS $f";
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
     echo -e "$green $yellow [${blue}03$yellow] $yellow=$f$white SQUID PROXY $SQUIDSTATUSS $f";
     echo -e "$green $yellow [${blue}04$yellow] $yellow=$f$white DROPBEAR $DROPSTATUSS $f";
     echo -e "$green $yellow [${blue}05$yellow] $yellow=$f$white OPENVPN $OPENSTATUSS $f";
     echo -e "$green $yellow [${blue}06$yellow] $yellow=$f$white SOCKS 5 $SOCKSTATUSS $f";
     echo -e "$green $yellow [${blue}07$yellow] $yellow=$f$white SSL - STUNNEL4 $STUNNELSTATUSS $f";
     echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white MTPROTO $MTPROXYSTATUSS $f";
-<<<<<<< HEAD
-=======
+
     echo -e "$green $yellow [${blue}09$yellow] $yellow=$f$white TROJAN $TROJANSTATUSS $f";
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
     echo -e "$green $yellow [${blue}00$yellow] $yellow=$f$white $EXIT $f";
     echo -e $DIVIS
     
@@ -369,10 +367,9 @@ RDYINSTALL() {
         6 | 06) source RDYSOCKS ;;
         7 | 07) source RDYSTUNNEL ;;
         8 | 08) source RDYMTPROTO ;;
-<<<<<<< HEAD
-=======
+
         9 | 09) source TROJAN ;;
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
         00) exit ;;
         * ) echo -e "$red Opção inválida!$f" ; echo "" ; sleep 2 ; $mainmenu ;;
     esac
@@ -467,10 +464,10 @@ RDYNEWUSER() {
     fi
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
+
+
 ##############
 RDYNEWUSERTIME(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}GERENCIAMENTO DE USUÁRIOS${blue}/${mag}$NEWUSERTIME$f     $yellow [${blue}v$yellow]$f";
@@ -593,10 +590,10 @@ RDYDELETEUSER(){
     RDYUSERMANAGER
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
+
+
 ####################
 RDYCHANGELIMIT(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}GERENCIAMENTO DE USUÁRIOS${blue}/${mag}$CHANGELIMIT$f    $yellow [${blue}v$yellow]$f";
@@ -896,10 +893,10 @@ RDYUSERDETAILS(){
     
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
+
+
 RDYDISCONNECTUSER(){
     echo -e "${blue}--$yellow>>$f$white menu${blue}/${yellow}GERENCIAMENTO DE USUÁRIOS${blue}/${mag}$DISCONNECTUSER$f";
     echo -e $DIVIS
@@ -1041,10 +1038,10 @@ RDYRESTOREBACKUP(){
     RDYUSERMANAGER
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> afde0a3 (Adiciona script de instalação do Trojan)
+
+
+
 ###################################################
 
 RDYUSERMANAGER(){
@@ -1470,6 +1467,7 @@ RDYTOOLS(){
     echo -e "$green $yellow [${blue}05$yellow] $yellow=$f$white $UPDATE_SYSTEM $f";
     echo -e "$green $yellow [${blue}06$yellow] $yellow=$f$white $SPEEDTEST $f";
     echo -e "$green $yellow [${blue}07$yellow] $yellow=$f$white $REBOOT_SYSTEM $f";
+    echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white GERENCIAR PORTAS $f";
     echo -e "$green $yellow [${blue}00$yellow] $yellow=$f$white $EXIT $f";
     echo -e $DIVIS
     echo -ne "$yellow  Opção:$f";read -p ""  option
@@ -1486,6 +1484,7 @@ RDYTOOLS(){
         $mainmenu;;
         4 | 04) RDYADD_REMOVE_HOSTS;;
         5 | 05) RDYUPDATE_SYSTEM;;
+        8 | 08) source PORTCHANGER;;
         00 | 0) exit ;;
         remove_all | r_all )
             echo -e "removendo resíduos, isso é ${red}PERIGOSO!$f";
