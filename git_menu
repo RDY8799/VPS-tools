@@ -44,6 +44,7 @@ download_from_github "STRINGS"
 download_from_github "menu"
 download_from_github "TROJAN"
 download_from_github "RDYBADVPN"
+download_from_github "PORTCHANGER"
 
 # Execute the 'menu' command if it exists
 if [ -x "/usr/local/bin/menu" ]; then
