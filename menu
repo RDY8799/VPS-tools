@@ -186,20 +186,15 @@ RDYINSTALL() {
     echo -e $DIVIS
     
     echo -e "$green $yellow [${blue}01$yellow] $yellow=$f$white SSLH $SSLHSTATUSS $f";
-
-    echo -e "$green $yellow [${blue}02$yellow] $yellow=$f$white BADVPN $STUNNELSTATUSS $f";
-
-    echo -e "$green $yellow [${blue}02$yellow] $yellow=$f$white BADVPN $BADVPNSTATUSS $f";
-
-    echo -e "$green $yellow [${blue}03$yellow] $yellow=$f$white SQUID PROXY $SQUIDSTATUSS $f";
-    echo -e "$green $yellow [${blue}04$yellow] $yellow=$f$white DROPBEAR $DROPSTATUSS $f";
-    echo -e "$green $yellow [${blue}05$yellow] $yellow=$f$white OPENVPN $OPENSTATUSS $f";
-    echo -e "$green $yellow [${blue}06$yellow] $yellow=$f$white SOCKS 5 $SOCKSTATUSS $f";
-    echo -e "$green $yellow [${blue}07$yellow] $yellow=$f$white SSL - STUNNEL4 $STUNNELSTATUSS $f";
-    echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white MTPROTO $MTPROXYSTATUSS $f";
-
-    echo -e "$green $yellow [${blue}09$yellow] $yellow=$f$white TROJAN $TROJANSTATUSS $f";
-
+    echo -e "$green $yellow [${blue}02$yellow] $yellow=$f$white STUNNEL $STUNNELSTATUSS $f";
+    echo -e "$green $yellow [${blue}03$yellow] $yellow=$f$white BADVPN $BADVPNSTATUSS $f";
+    echo -e "$green $yellow [${blue}04$yellow] $yellow=$f$white SQUID PROXY $SQUIDSTATUSS $f";
+    echo -e "$green $yellow [${blue}05$yellow] $yellow=$f$white DROPBEAR $DROPSTATUSS $f";
+    echo -e "$green $yellow [${blue}06$yellow] $yellow=$f$white OPENVPN $OPENSTATUSS $f";
+    echo -e "$green $yellow [${blue}07$yellow] $yellow=$f$white SOCKS 5 $SOCKSTATUSS $f";
+    echo -e "$green $yellow [${blue}08$yellow] $yellow=$f$white SSL - STUNNEL4 $STUNNELSTATUSS $f";
+    echo -e "$green $yellow [${blue}09$yellow] $yellow=$f$white MTPROTO $MTPROXYSTATUSS $f";
+    echo -e "$green $yellow [${blue}10$yellow] $yellow=$f$white TROJAN $TROJANSTATUSS $f";
     echo -e "$green $yellow [${blue}00$yellow] $yellow=$f$white $EXIT $f";
     echo -e $DIVIS
     
@@ -212,15 +207,15 @@ RDYINSTALL() {
             echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
         $mainmenu ;;
         1 | 01) source RDYSSLH ;;
-        2 | 02) source RDYBADVPN ;;
-        3 | 03) source RDYSQUIDPROXY ;;
-        4 | 04) source RDYDROPBEAR ;;
-        5 | 05) source RDYSTUNNEL ;;
-        6 | 06) source RDYSOCKS ;;
-        7 | 07) source RDYSTUNNEL ;;
-        8 | 08) source RDYMTPROTO ;;
-        9 | 09) source TROJAN ;;
-
+        2 | 02) source RDYSTUNNEL ;;
+        3 | 03) source RDYBADVPN ;;
+        4 | 04) source RDYSQUIDPROXY ;;
+        5 | 05) source RDYDROPBEAR ;;
+        6 | 06) source RDYOPENVPN ;;
+        7 | 07) source RDYSOCKS ;;
+        8 | 08) source RDYSTUNNEL ;;
+        9 | 09) source RDYMTPROTO ;;
+        10) source TROJAN ;;
         00) exit ;;
         * ) echo -e "$red Opção inválida!$f" ; echo "" ; sleep 2 ; $mainmenu ;;
     esac
