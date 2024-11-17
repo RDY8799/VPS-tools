@@ -160,15 +160,6 @@ else
 fi
 
 
-
-
-###################################################################################
-
-#### MTPROTO
-
-
-###################################################################################
-
 RDYSOCKS(){
     echo ""
 }
@@ -1347,7 +1338,7 @@ RDYABOUT(){
     figlet 'RDY SOFTWARE' -f small
     
     echo -e "\n\n";
-    echo -e "${yellow}   //// ${red}// ${green}/  ${yellow}RDY SCRIPT - RED\n${yellow}   //// ${red}// ${green}/  V 1.0.0\n\n${green} Telegram Canal: ${red}@rdysoftware\n${green} Telegram contato: ${red}@tomada$f";
+    echo -e "${yellow}   //// ${red}// ${green}/  ${yellow}RDY SCRIPT BASH\n${yellow}   //// ${red}// ${green}/  V 1.0.0\n\n${green} Telegram Canal: ${red}@rdysoftware\n${green} Telegram contato: ${red}@tomada$f";
     echo -e "\n\n";
     echo -e $DIVIS
     echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
