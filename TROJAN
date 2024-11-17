@@ -164,7 +164,7 @@ install_trojan() {
     echo ""
     echo -e $DIVIS
     echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p ""
-    $mainmenu
+    menu
 }
 
 # Menu principal
@@ -177,7 +177,10 @@ while true; do
     read -p "Continuar com a instalação do Trojan? [s/n]: " option
     case $option in
         [SsYy]* ) install_trojan; break ;;
-        [Nn]* ) echo "Instalação abortada!"; exit ;;
+        [Nn]* ) echo "Instalação abortada!"; 
+         echo -ne "${white}//${yellow}//${green}//${mag}//    ${green}Pressione uma tecla para retornar ao menu inicial...$f"; read -n1 -r -p "";
+    menu
+         ;;
         * ) echo "Opção inválida, por favor digite 's' ou 'n'." ;;
     esac
 done
